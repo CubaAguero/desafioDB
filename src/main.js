@@ -17,13 +17,12 @@ import Chat from './containers/chat'
 const container1 = new Container(optionsMySql, 'productos')
 //container1.NewTable()
 const chat1 = new Chat(optionsSQLite, 'chat')
-chat1.CreateTable()
+//chat1.CreateTable()
 
 io.on("connection", async socket => {
     console.log("Nuevo cliente conectado")
     let res = await container1.getAll()
-    //let resChat = await chat1.getAll()
-    let resChat = null
+    let resChat = await chat1.getAll()
     socket.emit("productos", res)
     socket.emit("chat", resChat)
 
@@ -42,7 +41,7 @@ io.on("connection", async socket => {
 })
 
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080;
 const connectedServer = httpServer.listen(PORT, () => {
     console.log(`Servidor Http con Websockets en el puerto ${connectedServer.address().port}`)
 })

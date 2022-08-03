@@ -79,12 +79,12 @@ chat.addEventListener('submit', e => {
 })
 
 function renderChat(msj) {
-  if(msj){
+  if(msj.length != 0){
       return msj.map(elm => {
           return (`
-              <b>${elm.message.name}</b>
-              [<span>${elm.message.fyh}</span>]:
-              <i>${elm.message.text}</i>
+              <b>${elm.name}</b>
+              [<span>${elm.fyh}</span>]:
+              <i>${elm.text}</i>
           `)
       }).join('</br>')
   }
